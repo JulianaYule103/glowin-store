@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil | Glowin</title>
+    <style>
+        body {
+            background: #fde4f1;
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        .box {
+            background: #fff;
+            padding: 30px;
+            border-radius: 15px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            width: 350px;
+        }
+
+        h2 {
+            color: #d63384;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 10px 20px;
+            background: #d63384;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            margin-top: 15px;
+            font-weight: bold;
+        }
+
+        .btn:hover {
+            background: #b2266a;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="box">
+        <h2>Hola, {{ user.username }} 🌸</h2>
+        <p>Has iniciado sesión correctamente en Glowin.</p>
+
+        <a href="/accounts/logout/" class="btn">Cerrar sesión</a>
+        <br><br>
+        <a href="/" class="btn" style="background:#444;">Volver al inicio</a>
+    </div>
+</body>
+
+</html>
