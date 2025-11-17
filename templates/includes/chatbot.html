@@ -1,0 +1,17 @@
+{% load static %}
+
+<button class="glowin-chat-launcher" id="glowinChatOpen">💬</button>
+
+<div class="glowin-chat-window" id="glowinChat">
+    <div class="gcw-header">
+        <div class="gcw-title">Asesora Glowin 🌸</div>
+        <button class="gcw-close" id="glowinChatClose">×</button>
+    </div>
+
+    <div class="gcw-body" id="gcwBody"></div>
+
+    <div class="gcw-input" id="gcwInput" style="display:none;">
+        <input type="text" id="gcwText" placeholder="Escribe aquí..." />
+        <button id="gcwSend">Enviar</button>
+    </div>
+</div>

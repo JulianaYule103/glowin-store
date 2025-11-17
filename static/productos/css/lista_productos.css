@@ -1,0 +1,116 @@
+/* ENCABEZADO DE CATEGORÍA */
+
+.category-header {
+    width: 100%;
+    height: 260px;
+    background: linear-gradient(rgba(214, 51, 132, 0.35),
+            rgba(214, 51, 132, 0.45)),
+        url("/static/img/fondo01.jpg") center/cover no-repeat;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin-bottom: 45px;
+}
+
+.category-header h1 {
+    font-family: "Playfair Display", serif;
+    font-size: 48px;
+    color: white;
+    letter-spacing: 1px;
+    text-shadow: 0px 4px 10px rgba(0, 0, 0, 0.4);
+}
+
+.category-header p {
+    font-size: 18px;
+    color: #fff;
+    margin-top: 10px;
+    text-shadow: 0px 2px 5px rgba(0, 0, 0, 0.4);
+}
+
+/* GRID DE PRODUCTOS */
+
+.products-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 35px;
+    padding: 0 5%;
+    margin-bottom: 60px;
+}
+
+.product-card {
+    background: #fff;
+    border-radius: 16px;
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+    transition: 0.25s ease;
+    position: relative;
+}
+
+.product-card:hover {
+    transform: translateY(-6px);
+    box-shadow: 0 8px 26px rgba(0, 0, 0, 0.15);
+}
+
+.product-card img {
+    width: 100%;
+    height: 240px;
+    object-fit: cover;
+}
+
+/* Badge */
+.product-badge {
+    position: absolute;
+    top: 12px;
+    left: 12px;
+    background: #d63384;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Body */
+.product-info {
+    padding: 15px;
+    text-align: center;
+}
+
+.product-name {
+    font-size: 16px;
+    font-weight: 600;
+    height: 40px;
+    margin-bottom: 6px;
+}
+
+.product-price {
+    color: #d63384;
+    font-size: 18px;
+    font-weight: bold;
+    margin-bottom: 12px;
+}
+
+/* Botón Glowin */
+.btn-glowin {
+    background: #d63384;
+    padding: 8px 14px;
+    border-radius: 8px;
+    text-decoration: none;
+    color: white;
+    font-weight: 500;
+    display: inline-block;
+    transition: .2s;
+}
+
+.btn-glowin:hover {
+    background: #b1296f;
+}
+
+/* Mensaje vacío */
+.empty-msg {
+    text-align: center;
+    width: 100%;
+    color: #666;
+    font-size: 16px;
+}

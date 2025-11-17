@@ -1,0 +1,37 @@
+.order-container {
+    max-width: 800px;
+    margin: 50px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.order-title {
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    color: #16a34a;
+}
+
+.order-subtitle {
+    text-align: center;
+    color: #6b7280;
+    margin-bottom: 20px;
+}
+
+.order-info {
+    font-size: 16px;
+    margin-bottom: 6px;
+}
+
+.order-products .list-group-item {
+    border-radius: 12px;
+}
+
+.order-total {
+    font-size: 22px;
+    font-weight: 700;
+    color: #16a34a;
+    text-align: right;
+}

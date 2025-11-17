@@ -1,81 +1,36 @@
-{% load socialaccount %}
+{% extends "base.html" %}
 {% load static %}
+{% load socialaccount %}
 
-<!DOCTYPE html>
-<html lang="es">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'account/css/signup.css' %}">
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Registro | Glowin</title>
-    <style>
-        body {
-            font-family: Arial;
-            background: #fce4ec;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+{% block content %}
 
-        .container {
-            background: #fff;
-            width: 350px;
-            padding: 30px;
-            border-radius: 12px;
-            text-align: center;
-        }
+<div class="signup-wrapper">
+    <div class="signup-box">
 
-        h2 {
-            color: #d63384;
-        }
-
-        input,
-        button {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 8px;
-        }
-
-        button {
-            background: #d63384;
-            color: white;
-            border: none;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background: #c2186b;
-        }
-
-        .google-btn {
-            margin-top: 10px;
-            display: block;
-            background: #fff;
-            border: 1px solid #bbb;
-            padding: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h2>Crear cuenta</h2>
+        <h2 class="signup-title">✨ Crear cuenta</h2>
+        <p class="signup-desc">Únete a Glowin y disfruta la mejor experiencia 💖</p>
 
         <form method="post">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Registrarme</button>
+
+            <button type="submit" class="signup-btn">Registrarme</button>
         </form>
 
-        <a href="{% provider_login_url 'google' %}" class="google-btn">Registrarme con Google</a>
-        <br>
-        <small>¿Ya tienes cuenta? <a href="{% url 'account_login' %}">Inicia sesión</a></small>
-    </div>
-</body>
+        <a href="{% provider_login_url 'google' %}" class="google-btn">
+            Continuar con Google
+        </a>
 
-</html>
+        <p class="signup-login">
+            ¿Ya tienes cuenta?
+            <a href="{% url 'account_login' %}">Inicia sesión</a>
+        </p>
+
+    </div>
+</div>
+
+{% endblock %}

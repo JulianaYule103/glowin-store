@@ -1,0 +1,20 @@
+{% load static %}
+<div id="searchOverlay" class="search-overlay">
+
+    <form action="{% url 'buscar' %}" method="GET" class="search-form">
+        <i class="bi bi-search search-icon"></i>
+
+        <input type="text" name="q" placeholder="Buscar" class="search-input">
+    </form>
+
+    <div class="search-suggestions">
+        <strong class="suggestions-title">RECOMENDACIONES:</strong>
+
+        {% for cat in categorias %}
+        <a href="{% url 'productos_por_categoria' cat.id %}" class="suggestion-link">
+            {{ cat.nombre }}
+        </a>
+        {% endfor %}
+    </div>
+
+</div>

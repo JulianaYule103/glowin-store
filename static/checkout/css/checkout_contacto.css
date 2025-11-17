@@ -1,0 +1,149 @@
+/* CHECKOUT - PASO 1: CONTACTO */
+
+.checkout-wrapper {
+    max-width: 900px;
+    margin: 40px auto;
+    padding: 30px;
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 15px 45px rgba(15, 23, 42, 0.12);
+}
+
+.checkout-title {
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    margin-bottom: 10px;
+    color: #111827;
+}
+
+.checkout-subtitle {
+    text-align: center;
+    color: #6b7280;
+    font-size: 14px;
+    margin-bottom: 28px;
+}
+
+/* PASOS DEL CHECKOUT */
+.steps {
+    display: flex;
+    justify-content: center;
+    gap: 40px;
+    margin-bottom: 30px;
+    font-size: 13px;
+}
+
+.step-item {
+    text-align: center;
+    color: #9ca3af;
+}
+
+.step-badge {
+    width: 32px;
+    height: 32px;
+    border-radius: 999px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 5px;
+    background: #f3f4f6;
+    color: #6b7280;
+    font-weight: 600;
+}
+
+.step-item.active .step-badge {
+    background: #d63384;
+    color: white;
+}
+
+.step-item.active {
+    color: #d63384;
+    font-weight: 500;
+}
+
+/* FORMULARIO */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-top: 10px;
+}
+
+.form-grid-full {
+    grid-column: span 2;
+}
+
+label {
+    font-size: 13px;
+    color: #374151;
+    margin-bottom: 4px;
+    display: block;
+}
+
+input[type="text"],
+input[type="email"] {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #e5e7eb;
+    font-size: 14px;
+}
+
+input:focus {
+    outline: none;
+    border-color: #d63384;
+    box-shadow: 0 0 0 1px rgba(214, 51, 132, 0.15);
+}
+
+/* BOTONES */
+.checkout-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 35px;
+}
+
+.btn-ghost {
+    border-radius: 999px;
+    padding: 9px 18px;
+    border: 1px solid #e5e7eb;
+    background: #ffffff;
+    font-size: 13px;
+    text-decoration: none;
+    color: #111827;
+}
+
+.btn-primary {
+    border-radius: 999px;
+    padding: 9px 24px;
+    border: none;
+    background: #111827;
+    color: white;
+    font-size: 13px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 640px) {
+    .checkout-wrapper {
+        margin: 20px 10px;
+        padding: 20px;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .form-grid-full {
+        grid-column: span 1;
+    }
+
+    .checkout-footer {
+        flex-direction: column-reverse;
+        gap: 10px;
+    }
+
+    .btn-ghost,
+    .btn-primary {
+        width: 100%;
+        text-align: center;
+    }
+}

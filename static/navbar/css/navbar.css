@@ -1,0 +1,85 @@
+.glowin-navbar {
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 9999;
+    padding: 18px 45px;
+
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    background: linear-gradient(to right,
+            rgba(255, 183, 213, 0.45),
+            rgba(255, 218, 235, 0.25));
+    backdrop-filter: blur(12px);
+
+    border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+    transition: 0.35s ease;
+}
+
+.navbar-shadow {
+    background: rgba(255, 183, 213, 0.85);
+    backdrop-filter: blur(15px);
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.15);
+}
+
+/* LOGO */
+.glowin-logo {
+    font-family: "Playfair Display", serif;
+    font-size: 32px;
+    color: #d63384;
+    text-decoration: none;
+    font-weight: 700;
+}
+
+/* MENÚ */
+.glowin-menu {
+    display: flex;
+    gap: 35px;
+}
+
+.glowin-menu a {
+    text-decoration: none;
+    font-weight: 500;
+    color: #222;
+    font-size: 15px;
+}
+
+.glowin-menu a:hover {
+    color: #d63384;
+}
+
+/* ICONOS */
+.glowin-icons {
+    display: flex;
+    gap: 22px;
+    font-size: 22px;
+    color: #000;
+}
+
+.glowin-icons i {
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.glowin-icons i:hover {
+    transform: scale(1.15);
+    color: #d63384;
+    cursor: pointer;
+}
+
+/* RESPONSIVE */
+@media (max-width: 768px) {
+
+    .glowin-navbar {
+        padding: 15px 25px;
+    }
+
+    .glowin-menu {
+        gap: 20px;
+    }
+
+    .glowin-icons {
+        gap: 15px;
+    }
+}

@@ -1,0 +1,167 @@
+/* ESTILO GENERAL DEL CARRITO */
+
+.cart-container {
+    max-width: 1100px;
+    margin: 50px auto;
+    padding: 20px;
+}
+
+.cart-title {
+    text-align: center;
+    font-family: "Playfair Display", serif;
+    font-size: 38px;
+    font-weight: 700;
+    color: #d63384;
+    margin-bottom: 15px;
+}
+
+.cart-box {
+    background: #ffffff;
+    border-radius: 16px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+    overflow: hidden;
+}
+
+/* TABLA */
+
+.cart-table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+.cart-table thead {
+    background: #ffe2f0;
+}
+
+.cart-table th {
+    padding: 15px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #444;
+    letter-spacing: 0.05em;
+}
+
+.cart-table td {
+    padding: 18px 12px;
+    font-size: 15px;
+    color: #2c2c2c;
+    border-bottom: 1px solid #f0f0f0;
+    text-align: center;
+}
+
+/* BOTONES DE CANTIDAD */
+
+.qty-btn {
+    background: #111827;
+    color: white;
+    border: none;
+    width: 26px;
+    height: 26px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.qty-form {
+    display: inline;
+}
+
+.qty-number {
+    padding: 4px 10px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    width: 40px;
+}
+
+/* BOTÓN ELIMINAR */
+
+.delete-btn {
+    background: #ff2d55;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    color: white;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+.delete-btn:hover {
+    background: #d81f43;
+}
+
+/* TOTAL Y ACCIONES */
+
+.total-box {
+    margin-top: 25px;
+    text-align: right;
+    font-size: 22px;
+    font-weight: 700;
+    color: #1f1f1f;
+}
+
+.action-row {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-between;
+}
+
+/* Botones inferiores */
+
+.btn-glowin {
+    background: #111827;
+    color: #fff;
+    padding: 12px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-size: 15px;
+    font-weight: 500;
+}
+
+.btn-glowin:hover {
+    background: #0d1422;
+}
+
+.btn-danger {
+    background: #ff3b30 !important;
+}
+
+.btn-danger:hover {
+    background: #d92822 !important;
+}
+
+.btn-green {
+    background: #0ea95a !important;
+}
+
+.btn-green:hover {
+    background: #0b7d44 !important;
+}
+
+/* RESPONSIVE */
+
+@media(max-width: 768px) {
+    .cart-table thead {
+        display: none;
+    }
+
+    .cart-table tr {
+        display: block;
+        margin-bottom: 20px;
+        background: #fff;
+        border-radius: 16px;
+        padding: 15px;
+        box-shadow: 0 4px 16px rgba(0, 0, 0, 0.08);
+    }
+
+    .cart-table td {
+        display: flex;
+        justify-content: space-between;
+        padding: 10px 5px;
+        border-bottom: none;
+    }
+
+    .action-row {
+        flex-direction: column;
+        gap: 10px;
+    }
+}

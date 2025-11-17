@@ -1,0 +1,78 @@
+/* FOOTER GLOWIN — ESTILO PROFESIONAL */
+
+.glowin-footer {
+    background: #111;
+    color: white;
+    padding: 50px 5% 25px 5%;
+    margin-top: 60px;
+    font-family: "Poppins", sans-serif;
+}
+
+/* ---- GRID DE COLUMNAS ---- */
+.footer-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+    gap: 40px;
+    margin-bottom: 40px;
+}
+
+/* ---- TITULOS DE COLUMNAS ---- */
+.footer-column h4 {
+    margin-bottom: 15px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #d63384;
+}
+
+/* ---- ENLACES ---- */
+.footer-column a {
+    display: block;
+    color: #ddd;
+    margin-bottom: 6px;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.footer-column a:hover {
+    color: #fff;
+    transition: 0.2s;
+}
+
+/* ---- TEXTO ---- */
+.footer-column p {
+    font-size: 14px;
+    color: #ccc;
+}
+
+/* ---- REDES SOCIALES ---- */
+.footer-social {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+.footer-social img {
+    width: 26px;
+    margin: 0 8px;
+    filter: brightness(0) invert(1);
+    opacity: 0.8;
+}
+
+.footer-social img:hover {
+    opacity: 1;
+}
+
+/* ---- COPYRIGHT ---- */
+.footer-bottom {
+    text-align: center;
+    font-size: 13px;
+    color: #aaa;
+    border-top: 1px solid #333;
+    padding-top: 15px;
+}
+
+/* ---- RESPONSIVE ---- */
+@media (max-width: 768px) {
+    .footer-container {
+        gap: 25px;
+    }
+}

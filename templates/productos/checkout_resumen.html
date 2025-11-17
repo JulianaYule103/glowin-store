@@ -1,0 +1,120 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout_resumen.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="checkout-wrapper">
+    <h1 class="checkout-title">Finalizar compra</h1>
+    <p class="checkout-subtitle">Paso 3 · Resumen y pago</p>
+
+    <div class="steps">
+
+        <div class="step-item">
+            <div class="step-badge">1</div>
+            <div>Contacto</div>
+        </div>
+
+        <div class="step-item">
+            <div class="step-badge">2</div>
+            <div>Envío</div>
+        </div>
+
+        <div class="step-item active">
+            <div class="step-badge">3</div>
+            <div>Resumen</div>
+        </div>
+
+    </div>
+
+    <div class="summary-grid">
+
+        <!-- PRODUCTOS -->
+        <div class="summary-box">
+            <div class="summary-title">Productos en tu pedido</div>
+
+            {% for item in items %}
+            <div class="summary-item">
+                <img src="{{ item.producto.imagen.url }}" alt="Imagen producto">
+
+                <div>
+                    <div class="summary-name">{{ item.producto.nombre }}</div>
+                    <div class="summary-qty">Cantidad: {{ item.cantidad }}</div>
+                </div>
+
+                <div class="summary-price">
+                    $ {{ item.subtotal|floatformat:0 }}
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+
+        <!-- RESUMEN PAGO -->
+        <div class="summary-box">
+            <div class="summary-title">Resumen de pago</div>
+
+            <div class="summary-row">
+                <span>Subtotal productos</span>
+                <span>$ {{ total_productos|floatformat:0 }}</span>
+            </div>
+
+            <div class="summary-row">
+                <span>Envío ({{ envio.metodo }})</span>
+                <span>$ {{ costo_envio|floatformat:0 }}</span>
+            </div>
+
+            <hr>
+
+            <div class="summary-row total">
+                <span>Total a pagar</span>
+                <span>$ {{ total_final|floatformat:0 }}</span>
+            </div>
+        </div>
+
+    </div>
+
+    <div class="checkout-footer">
+        <a href="{% url 'checkout_envio' %}" class="btn-ghost">Volver a envío</a>
+
+        <button id="btnPagarMP" class="btn-mp" onclick="pagarMP()">
+            💳 Pagar con Mercado Pago
+        </button>
+    </div>
+
+</div>
+
+<script src="https://sdk.mercadopago.com/js/v2"></script>
+
+<script>
+    function pagarMP() {
+        fetch("{% url 'crear_preferencia' %}", {
+            method: "POST",
+            headers: {
+                "X-CSRFToken": "{{ csrf_token }}",
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({})
+        })
+            .then(res => res.json())
+            .then(data => {
+                if (data.preference_id) {
+                    const mp = new MercadoPago("{{ MP_PUBLIC_KEY }}");
+                    mp.checkout({
+                        preference: { id: data.preference_id },
+                        autoOpen: true
+                    });
+                } else {
+                    alert("Hubo un error al crear la preferencia.");
+                }
+            })
+            .catch(err => {
+                console.error(err);
+                alert("Error en la comunicación.");
+            });
+    }
+</script>
+
+{% endblock %}

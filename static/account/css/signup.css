@@ -1,0 +1,86 @@
+/* SIGNUP — ESTILO GLOWIN */
+
+.signup-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 80px 20px;
+}
+
+.signup-box {
+    width: 360px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 14px;
+    text-align: center;
+    border: 1px solid #f3d0de;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.signup-title {
+    color: #d63384;
+    font-size: 28px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.signup-desc {
+    font-size: 15px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+.signup-box input {
+    width: 100%;
+    padding: 10px;
+    border-radius: 8px;
+    border: 1px solid #bbb;
+    margin-bottom: 12px;
+}
+
+.signup-btn {
+    width: 100%;
+    padding: 12px;
+    background: #d63384;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-weight: bold;
+    margin-top: 8px;
+    transition: .2s;
+}
+
+.signup-btn:hover {
+    background: #b1296f;
+}
+
+.google-btn {
+    margin-top: 12px;
+    display: block;
+    background: #fff;
+    border: 1px solid #bbb;
+    padding: 10px;
+    border-radius: 10px;
+    text-decoration: none;
+    color: #333;
+    font-weight: bold;
+    transition: .2s;
+}
+
+.google-btn:hover {
+    background: #f7f7f7;
+}
+
+.signup-login {
+    margin-top: 15px;
+    font-size: 14px;
+}
+
+.signup-login a {
+    color: #d63384;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.signup-login a:hover {
+    text-decoration: underline;
+}

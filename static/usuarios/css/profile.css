@@ -1,0 +1,66 @@
+/* PERFIL — ESTILO GLOWIN */
+
+.profile-wrapper {
+    display: flex;
+    justify-content: center;
+    padding: 70px 20px;
+}
+
+.profile-card {
+    background: #fff;
+    width: 420px;
+    padding: 30px;
+    border-radius: 18px;
+    border: 1px solid #f3d0de;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.profile-header {
+    text-align: center;
+}
+
+.profile-avatar {
+    width: 80px;
+    border-radius: 50%;
+    margin-bottom: 10px;
+}
+
+.profile-title {
+    color: #d63384;
+    font-size: 26px;
+    margin-bottom: 5px;
+}
+
+.profile-welcome {
+    color: #555;
+    font-size: 15px;
+}
+
+.profile-info {
+    margin: 20px 0;
+    font-size: 15px;
+    color: #444;
+}
+
+.profile-info p {
+    margin: 6px 0;
+}
+
+.profile-actions {
+    text-align: center;
+    margin-top: 20px;
+}
+
+.btn-logout {
+    background: #d63384;
+    color: white;
+    padding: 10px 22px;
+    border-radius: 12px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: 0.2s;
+}
+
+.btn-logout:hover {
+    background: #b12a6f;
+}

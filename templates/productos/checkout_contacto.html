@@ -1,0 +1,56 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout_contacto.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="checkout-wrapper">
+    <h1 class="checkout-title">Finalizar compra</h1>
+    <p class="checkout-subtitle">Paso 1 · Información de contacto</p>
+
+    <div class="steps">
+        <div class="step-item active">
+            <div class="step-badge">1</div>
+            <div>Contacto</div>
+        </div>
+        <div class="step-item">
+            <div class="step-badge">2</div>
+            <div>Envío</div>
+        </div>
+        <div class="step-item">
+            <div class="step-badge">3</div>
+            <div>Resumen</div>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-grid">
+            <div>
+                <label for="id_nombre">Nombre</label>
+                <input type="text" id="id_nombre" name="nombre" value="{{ contacto.nombre|default_if_none:'' }}" required>
+            </div>
+
+            <div>
+                <label for="id_apellido">Apellido</label>
+                <input type="text" id="id_apellido" name="apellido" value="{{ contacto.apellido|default_if_none:'' }}" required>
+            </div>
+
+            <div class="form-grid-full">
+                <label for="id_email">Correo electrónico</label>
+                <input type="email" id="id_email" name="email" value="{{ contacto.email|default_if_none:'' }}" required>
+            </div>
+        </div>
+
+        <div class="checkout-footer">
+            <a href="{% url 'ver_carrito' %}" class="btn-ghost">Volver al carrito</a>
+            <button type="submit" class="btn-primary">Continuar ➜</button>
+        </div>
+    </form>
+</div>
+
+{% endblock %}

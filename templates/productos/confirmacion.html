@@ -1,9 +1,21 @@
-{% extends 'base.html' %}
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'confirmacion/css/confirmacion.css' %}">
+{% endblock %}
 
 {% block content %}
-<div class="text-center mt-5">
-    <h2>✅ ¡Gracias por tu compra!</h2>
-    <p>Tu pedido fue registrado exitosamente.</p>
-    <a href="/" class="btn btn-dark">Volver al inicio</a>
+
+<div class="confirm-container">
+    <h2 class="confirm-title">✅ ¡Gracias por tu compra!</h2>
+
+    <p class="confirm-text">
+        Tu pedido fue registrado exitosamente.
+        En breve recibirás un correo con todos los detalles 💖
+    </p>
+
+    <a href="/" class="confirm-btn">🏠 Volver al inicio</a>
 </div>
+
 {% endblock %}

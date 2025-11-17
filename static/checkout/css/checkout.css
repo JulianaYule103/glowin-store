@@ -1,0 +1,92 @@
+/* ====== Barra de progreso ====== */
+.checkout-progress {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 40px;
+}
+
+.progress-steps {
+    display: flex;
+    align-items: center;
+    gap: 20px;
+}
+
+.step-item {
+    text-align: center;
+    width: 90px;
+    font-size: 14px;
+}
+
+.circle {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    border: 2px solid #d63384;
+    background: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+    font-weight: bold;
+    color: #d63384;
+    transition: .3s;
+}
+
+.step-item.active .circle {
+    background: #d63384;
+    color: #fff;
+    transform: scale(1.15);
+}
+
+.line {
+    flex-grow: 1;
+    height: 3px;
+    background: #f3c1d7;
+    border-radius: 2px;
+}
+
+.line.active {
+    background: #d63384;
+}
+
+/* ====== cajas ====== */
+.checkout-box {
+    background: white;
+    padding: 25px;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
+}
+
+.hidden {
+    display: none;
+}
+
+/* ====== pedido ====== */
+.order-summary {
+    background: #fff7fb;
+    padding: 20px;
+    border-radius: 12px;
+    border: 1px solid #f3d0de;
+}
+
+/* ====== envío UI ====== */
+.envio-option {
+    border: 2px solid #f3c1d7;
+    padding: 15px;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: .2s;
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 12px;
+}
+
+.envio-option:hover {
+    border-color: #d63384;
+    background: #fff4fa;
+}
+
+.envio-option.selected {
+    border-color: #d63384;
+    background: #ffe6f2;
+}

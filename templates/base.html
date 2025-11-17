@@ -5,275 +5,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Glowin</title>
+
+    <!-- BOOTSTRAP CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        .nav-logo {
-            font-family: "Playfair Display", serif;
-            font-size: 30px;
-            font-weight: bold;
-            color: #d63384 !important;
-            text-decoration: none;
-        }
-    </style>
+
+    <!-- ICONOS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" rel="stylesheet">
+
+    <!-- FUENTES -->
+    <link
+        href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@600;700&family=Poppins:wght@300;400;500;600&display=swap"
+        rel="stylesheet">
+
+    <!-- CSS GLOBAL -->
+    <link rel="stylesheet" href="{% static 'searchbar/css/searchbar.css' %}">
+    <link rel="stylesheet" href="{% static 'navbar/css/navbar.css' %}">
+    <link rel="stylesheet" href="{% static 'footer/css/footer.css' %}">
+    <link rel="stylesheet" href="{% static 'chatbot/css/chatbot.css' %}">
+    <link rel="stylesheet" href="{% static 'base/css/base.css' %}">
+
+    <!-- CSS ADICIONAL DE CADA PÁGINA -->
+    {% block extra_css %}
+    {% endblock %}
+
 </head>
 
 <body>
 
-    <!-- === Barra de navegación === -->
-    <nav class="navbar navbar-light bg-white shadow-sm px-4">
-        <a href="/" class="nav-logo">✨ Glowin</a>
+    <!-- NAVBAR -->
+    {% include "includes/navbar.html" %}
 
-        <a href="{% url 'ver_carrito' %}" class="btn btn-outline-dark">
-            🛍️ Carrito
-        </a>
-    </nav>
+    <!-- SEARCHBAR DEL NAVBAR -->
+    {% include "includes/searchbar.html" %}
 
-    <!-- === Contenido de cada página === -->
-    <div class="container mt-4">
+    <!-- CONTENIDO -->
+    <main class="container-fluid p-0 m-0">
         {% block content %}
         {% endblock %}
-    </div>
-    <p style="position:fixed;bottom:100px;right:30px;z-index:99999;background:#ffe;border:1px solid #ccc;padding:4px;">
-        Chat debería aparecer aquí 👇
-    </p>
-    <!-- === Chatbot Glowin (FASE 1) === -->
-    <style>
-        .glowin-chat-launcher {
-            position: fixed;
-            right: 20px;
-            bottom: 20px;
-            z-index: 9999;
-            width: 56px;
-            height: 56px;
-            border-radius: 50%;
-            background: #d63384;
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 8px 24px rgba(0, 0, 0, .2);
-            cursor: pointer;
-            border: none;
-            font-size: 22px;
-        }
+    </main>
 
-        .glowin-chat-window {
-            position: fixed;
-            right: 20px;
-            bottom: 90px;
-            z-index: 9999;
-            width: 340px;
-            max-width: 90vw;
-            background: #fff;
-            border-radius: 14px;
-            overflow: hidden;
-            box-shadow: 0 16px 40px rgba(0, 0, 0, .25);
-            display: none;
-            flex-direction: column;
-            border: 1px solid #f3d0de;
-        }
+    <!-- CHATBOT -->
+    {% include "includes/chatbot.html" %}
 
-        .gcw-header {
-            background: linear-gradient(90deg, #f9a8d4, #f472b6);
-            color: #fff;
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-        }
+    <!-- FOOTER -->
+    {% include "includes/footer.html" %}
 
-        .gcw-title {
-            font-weight: 700;
-            font-size: 14px;
-        }
+    <!-- BOOTSTRAP JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 
-        .gcw-close {
-            background: transparent;
-            border: none;
-            color: #fff;
-            font-size: 20px;
-            cursor: pointer;
-        }
+    <!-- JS GLOBAL -->
+    <script src="{% static 'navbar/js/navbar.js' %}"></script>
+    <script src="{% static 'chatbot/js/chatbot.js' %}"></script>
+    <script src="{% static 'base/js/base.js' %}"></script>
+    <script src="{% static 'searchbar/js/searchbar.js' %}"></script>
 
-        .gcw-body {
-            padding: 12px;
-            max-height: 340px;
-            overflow: auto;
-            background: #fff7fb;
-        }
-
-        .gcw-input {
-            padding: 10px;
-            border-top: 1px solid #f3d0de;
-            background: #fff;
-            display: flex;
-            gap: 8px;
-        }
-
-        .gcw-input input {
-            flex: 1;
-            border: 1px solid #e9b5ca;
-            border-radius: 10px;
-            padding: 8px 10px;
-            font-size: 14px;
-        }
-
-        .gcw-input button {
-            background: #d63384;
-            color: #fff;
-            border: none;
-            padding: 8px 14px;
-            border-radius: 10px;
-            cursor: pointer;
-        }
-
-        .msg {
-            display: inline-block;
-            padding: 8px 10px;
-            border-radius: 12px;
-            margin: 6px 0;
-            max-width: 90%;
-            line-height: 1.3;
-            font-size: 14px;
-        }
-
-        .msg.bot {
-            background: #fff;
-            border: 1px solid #f3d0de;
-        }
-
-        .msg.user {
-            background: #d63384;
-            color: #fff;
-            align-self: flex-end;
-        }
-
-        .gcw-quick {
-            display: flex;
-            gap: 8px;
-            margin-top: 6px;
-            flex-wrap: wrap;
-        }
-
-        .gcw-quick button {
-            border: 1px solid #d63384;
-            background: #fff;
-            color: #d63384;
-            padding: 6px 10px;
-            border-radius: 10px;
-            cursor: pointer;
-            font-size: 13px;
-        }
-
-        .gcw-quick button:hover {
-            background: #ffe6f2;
-        }
-    </style>
-
-    <button class="glowin-chat-launcher" id="glowinChatOpen" aria-label="Abrir chat">💬</button>
-
-    <div class="glowin-chat-window" id="glowinChat">
-        <div class="gcw-header">
-            <div class="gcw-title">Asesora Glowin 🌸</div>
-            <button class="gcw-close" id="glowinChatClose" aria-label="Cerrar">×</button>
-        </div>
-        <div class="gcw-body" id="gcwBody"></div>
-        <div class="gcw-input" id="gcwInput" style="display:none;">
-            <input type="text" id="gcwText" placeholder="Escribe aquí..." />
-            <button id="gcwSend">Enviar</button>
-        </div>
-    </div>
-
-    <script>
-        (function () {
-            const openBtn = document.getElementById('glowinChatOpen');
-            const closeBtn = document.getElementById('glowinChatClose');
-            const win = document.getElementById('glowinChat');
-            const body = document.getElementById('gcwBody');
-            const inputBar = document.getElementById('gcwInput');
-            const inputText = document.getElementById('gcwText');
-            const sendBtn = document.getElementById('gcwSend');
-
-            let state = { step: 'welcome', name: null };
-
-            function addMsg(text, who = 'bot') {
-                const b = document.createElement('div');
-                b.className = 'msg ' + who;
-                b.textContent = text;
-                body.appendChild(b);
-                body.scrollTop = body.scrollHeight;
-            }
-
-            function addQuick(buttons) {
-                const wrap = document.createElement('div');
-                wrap.className = 'gcw-quick';
-                buttons.forEach(btn => {
-                    const b = document.createElement('button');
-                    b.textContent = btn.text;
-                    b.addEventListener('click', btn.onClick);
-                    wrap.appendChild(b);
-                });
-                body.appendChild(wrap);
-                body.scrollTop = body.scrollHeight;
-            }
-
-            function start() {
-                body.innerHTML = '';
-                addMsg('¡Hola! Soy tu asesora Glowin ✨ ¿Puedo ayudarte a encontrar algo hoy?');
-                addQuick([
-                    { text: 'Sí, claro', onClick: () => yesFlow() },
-                    { text: 'No, gracias', onClick: () => { addMsg('Perfecto 🌸. Si necesitas algo, estaré aquí.'); } }
-                ]);
-            }
-
-            function yesFlow() {
-                state.step = 'ask_name';
-                addMsg('¡Genial! ¿Cómo te llamas?');
-                inputBar.style.display = 'flex';
-                inputText.placeholder = 'Escribe tu nombre';
-                inputText.focus();
-            }
-
-            function afterName() {
-                addMsg(`Encantada, ${state.name} 💕. ¿Qué te gustaría explorar?`);
-                inputBar.style.display = 'none';
-                addQuick([
-                    { text: 'Ropa', onClick: () => addMsg('Perfecto, luego te mostraré opciones de ropa 👗') },
-                    { text: 'Maquillaje', onClick: () => addMsg('¡Maquillaje! Luego te recomendaré tonos ideales 💄') },
-                    { text: 'Cuidado de la Piel', onClick: () => addMsg('Excelente, veremos rutinas para tu piel 🧴') },
-                    { text: 'Cuidado Capilar', onClick: () => addMsg('¡Cabello radiante! Te asesoraré según tu tipo 💇‍♀️') }
-                ]);
-            }
-
-            openBtn.addEventListener('click', () => {
-                win.style.display = 'flex';
-                start();
-            });
-            closeBtn.addEventListener('click', () => {
-                win.style.display = 'none';
-            });
-
-            sendBtn.addEventListener('click', handleSend);
-            inputText.addEventListener('keydown', (e) => { if (e.key === 'Enter') handleSend(); });
-
-            function handleSend() {
-                const text = (inputText.value || '').trim();
-                if (!text) return;
-                addMsg(text, 'user');
-                inputText.value = '';
-
-                if (state.step === 'ask_name') {
-                    state.name = text;
-                    localStorage.setItem('glowin_name', state.name);
-                    afterName();
-                }
-            }
-
-            const saved = localStorage.getItem('glowin_name');
-            if (saved) state.name = saved;
-        })();
-    </script>
-    <!-- === /Chatbot Glowin === -->
+    <!-- JS ADICIONAL DE CADA PÁGINA -->
+    {% block extra_js %}
+    {% endblock %}
 
 </body>
 

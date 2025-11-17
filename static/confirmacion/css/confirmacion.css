@@ -1,0 +1,36 @@
+.confirm-container {
+    max-width: 600px;
+    margin: 80px auto;
+    padding: 40px;
+    background: #ffffff;
+    text-align: center;
+    border-radius: 20px;
+    box-shadow: 0 4px 18px rgba(0, 0, 0, 0.08);
+}
+
+.confirm-title {
+    font-size: 32px;
+    font-weight: 700;
+    color: #16a34a;
+    margin-bottom: 10px;
+}
+
+.confirm-text {
+    font-size: 16px;
+    color: #6b7280;
+    margin-bottom: 25px;
+}
+
+.confirm-btn {
+    background: #111827;
+    padding: 12px 24px;
+    border-radius: 10px;
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: 0.2s;
+}
+
+.confirm-btn:hover {
+    background: #000;
+}

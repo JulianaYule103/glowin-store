@@ -1,4 +1,37 @@
-<h2>Mi perfil</h2>
-<p>Bienvenida, {{ user.username }}</p>
+{% extends "base.html" %}
+{% load static %}
 
-<a href="{% url 'logout' %}">Cerrar sesión</a>
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'usuarios/css/profile.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="profile-wrapper">
+
+    <div class="profile-card">
+
+        <div class="profile-header">
+            <img src="{% static 'img/icono-usuario.png' %}" class="profile-avatar" alt="Usuario">
+            <h2 class="profile-title">Mi perfil ✨</h2>
+            <p class="profile-welcome">Bienvenida, <strong>{{ user.username }}</strong></p>
+        </div>
+
+        <hr>
+
+        <div class="profile-info">
+
+            <p><strong>Nombre de usuario:</strong> {{ user.username }}</p>
+            <p><strong>Email registrado:</strong> {{ user.email }}</p>
+
+        </div>
+
+        <div class="profile-actions">
+            <a href="{% url 'account_logout' %}" class="btn-logout">Cerrar sesión</a>
+        </div>
+
+    </div>
+
+</div>
+
+{% endblock %}

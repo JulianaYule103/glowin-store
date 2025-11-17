@@ -1,0 +1,68 @@
+/* SEARCHBAR GLOWIN — ESTILO PROFESIONAL */
+
+.search-overlay {
+    position: absolute;
+    top: 80px;
+    left: 0;
+    width: 100%;
+    padding: 25px 60px;
+    background: white;
+    display: none;
+    z-index: 9998;
+    border-bottom: 1px solid #eee;
+    transition: 0.3s ease;
+}
+
+/* FORMULARIO */
+.search-form {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    width: 100%;
+}
+
+.search-icon {
+    font-size: 28px;
+    color: #777;
+}
+
+.search-input {
+    flex: 1;
+    padding: 12px 5px;
+    border: none;
+    border-bottom: 1px solid #aaa;
+    outline: none;
+    font-size: 18px;
+}
+
+/* SUGERENCIAS */
+.search-suggestions {
+    margin-top: 25px;
+    font-size: 15px;
+}
+
+.suggestions-title {
+    color: #555;
+}
+
+.suggestion-link {
+    margin-left: 20px;
+    color: #333;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.suggestion-link:hover {
+    color: #d63384;
+}
+
+/* RESPONSIVE */
+@media (max-width: 600px) {
+    .search-overlay {
+        padding: 20px;
+    }
+
+    .search-input {
+        font-size: 16px;
+    }
+}

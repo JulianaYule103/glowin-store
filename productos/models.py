@@ -50,6 +50,7 @@ class Producto(models.Model):
     tallas = models.ManyToManyField(Talla, blank=True)
     colores = models.ManyToManyField(Color, blank=True)
     tonos = models.ManyToManyField('Tono', blank=True, verbose_name="Tonos disponibles")
+    destacado = models.BooleanField(default=False)
 
     def __str__(self):
         return self.nombre

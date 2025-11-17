@@ -1,100 +1,36 @@
-{% load socialaccount %}
+{% extends "base.html" %}
 {% load static %}
+{% load socialaccount %}
 
-<!DOCTYPE html>
-<html lang="es">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'account/css/login.css' %}">
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>Iniciar sesión | Glowin</title>
-    <style>
-        body {
-            font-family: Arial;
-            background-color: #fce4ec;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-        }
+{% block content %}
 
-        .container {
-            background: #fff;
-            width: 350px;
-            padding: 30px;
-            border-radius: 12px;
-            box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
-            text-align: center;
-        }
+<div class="login-wrapper">
 
-        h2 {
-            color: #d63384;
-            margin-bottom: 10px;
-        }
+    <div class="login-card">
+        <h2 class="login-title">Iniciar sesión</h2>
 
-        input {
-            width: 100%;
-            padding: 10px;
-            margin: 8px 0;
-            border-radius: 8px;
-            border: 1px solid #bbb;
-        }
-
-        button {
-            width: 100%;
-            padding: 10px;
-            background: #d63384;
-            color: #fff;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            font-weight: bold;
-        }
-
-        button:hover {
-            background: #c2186b;
-        }
-
-        .google-btn {
-            margin-top: 10px;
-            display: block;
-            background: #fff;
-            border: 1px solid #bbb;
-            padding: 10px;
-            border-radius: 8px;
-            text-decoration: none;
-            color: #333;
-            font-weight: bold;
-        }
-
-        .google-btn:hover {
-            background: #f2f2f2;
-        }
-
-        small a {
-            color: #d63384;
-        }
-    </style>
-</head>
-
-<body>
-    <div class="container">
-        <h2>Iniciar sesión</h2>
-
-        <form method="post">
+        <form method="post" class="login-form">
             {% csrf_token %}
             {{ form.as_p }}
-            <button type="submit">Entrar</button>
+
+            <button type="submit" class="btn-login">Entrar</button>
         </form>
 
-        <br>
-        <div>
-            <a href="{% provider_login_url 'google' %}" class="google-btn">Continuar con Google</a>
-        </div>
+        <a href="{% provider_login_url 'google' %}" class="google-btn">
+            <img src="{% static 'img/icono-google.png' %}" class="google-icon">
+            Continuar con Google
+        </a>
 
-        <br>
-        <small>¿No tienes cuenta? <a href="/accounts/signup/">Regístrate</a></small>
+        <p class="signup-text">
+            ¿No tienes cuenta?
+            <a href="{% url 'account_signup' %}">Regístrate</a>
+        </p>
     </div>
-</body>
 
-</html>
+</div>
+
+{% endblock %}

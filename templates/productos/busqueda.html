@@ -1,0 +1,65 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'busqueda/css/busqueda.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<!-- ===========================
+     🌸 RECOMENDACIONES
+=========================== -->
+<div class="recom-title">Recomendaciones:</div>
+
+<div class="recom-container">
+    <a href="{% url 'productos_por_categoria' 1 %}" class="recom-pill">Maquillaje</a>
+    <a href="{% url 'productos_por_categoria' 2 %}" class="recom-pill">Cuidado Facial</a>
+    <a href="{% url 'productos_por_categoria' 3 %}" class="recom-pill">Cuidado Capilar</a>
+    <a href="{% url 'productos_por_categoria' 4 %}" class="recom-pill">Moda & Estilo</a>
+</div>
+
+<!-- ===========================
+     🌸 ENCABEZADO DE RESULTADOS
+=========================== -->
+<section class="search-header">
+    <h1>Resultados de: "{{ query }}"</h1>
+    <p>Te mostramos productos relacionados con tu búsqueda ✨</p>
+</section>
+
+<!-- ===========================
+     🌸 PRODUCTOS ENCONTRADOS
+=========================== -->
+<section class="products-grid">
+    {% for producto in resultados %}
+    <article class="product-card">
+
+        <span class="badge">{{ producto.categoria.nombre }}</span>
+
+        <a href="{% url 'detalle_producto' producto.id %}">
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" alt="{{ producto.nombre }}">
+            {% else %}
+            <img src="{% static 'img/placeholder.jpg' %}" alt="{{ producto.nombre }}">
+            {% endif %}
+        </a>
+
+        <div class="product-info">
+            <div class="product-name">{{ producto.nombre }}</div>
+            <div class="product-price">$ {{ producto.precio|floatformat:0 }}</div>
+
+            <a href="{% url 'agregar_al_carrito' producto.id %}" class="btn-glowin">
+                Añadir al carrito
+            </a>
+        </div>
+
+    </article>
+    {% empty %}
+    <p class="no-results">
+        No encontramos productos relacionados 😢<br>
+        Intenta con otra palabra.
+    </p>
+    {% endfor %}
+</section>
+
+{% endblock %}

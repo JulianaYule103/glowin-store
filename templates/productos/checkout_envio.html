@@ -1,0 +1,125 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'checkout/css/checkout_envio.css' %}">
+{% endblock %}
+
+{% block content %}
+
+<div class="checkout-wrapper">
+    <h1 class="checkout-title">Finalizar compra</h1>
+    <p class="checkout-subtitle">Paso 2 · Dirección y envío</p>
+
+    <div class="steps">
+        <div class="step-item">
+            <div class="step-badge">1</div>
+            <div>Contacto</div>
+        </div>
+        <div class="step-item active">
+            <div class="step-badge">2</div>
+            <div>Envío</div>
+        </div>
+        <div class="step-item">
+            <div class="step-badge">3</div>
+            <div>Resumen</div>
+        </div>
+    </div>
+
+    <form method="post">
+        {% csrf_token %}
+
+        <div class="form-grid">
+
+            <div class="form-grid-full">
+                <label for="id_direccion">Dirección completa</label>
+                <input type="text" id="id_direccion" name="direccion" value="{{ envio.direccion|default_if_none:'' }}"
+                    required>
+            </div>
+
+            <div>
+                <label for="id_ciudad">Ciudad</label>
+                <input type="text" id="id_ciudad" name="ciudad" value="{{ envio.ciudad|default_if_none:'' }}" required>
+            </div>
+
+            <div>
+                <label for="id_departamento">Departamento</label>
+                <input type="text" id="id_departamento" name="departamento"
+                    value="{{ envio.departamento|default_if_none:'' }}" required>
+            </div>
+
+            <div class="form-grid-full">
+                <label for="id_telefono">Teléfono</label>
+                <input type="tel" id="id_telefono" name="telefono" value="{{ envio.telefono|default_if_none:'' }}"
+                    required>
+            </div>
+        </div>
+
+        <!-- OPCIONES DE ENVÍO -->
+        <div class="shipping-options">
+            <p class="shipping-label">Elige el método de envío:</p>
+
+            {% if envio_gratis %}
+            <!-- ENVÍO GRATIS AUTOMÁTICO -->
+            <div class="shipping-card">
+                <div class="shipping-icon">🎁</div>
+                <div class="shipping-text">
+                    <div class="shipping-title">Envío gratis</div>
+                    <div class="shipping-desc">
+                        Aplicado automáticamente por compras desde $ {{ ENVIO_GRATIS_MINIMO|floatformat:0 }}.
+                    </div>
+                </div>
+                <div class="shipping-price">$ 0</div>
+            </div>
+            <input type= "hidden" name= "metodo_envio" value= "gratis">
+
+            {% else %}
+
+            <!-- ENVÍO ESTÁNDAR -->
+            <label class="shipping-card">
+                <input type= "radio" name= "metodo_envio" value= "estandar" {% if not envio.metodo or
+                    envio.metodo== "estandar" %}checked{% endif %}>
+                <div class="shipping-icon">🚚</div>
+                <div class="shipping-text">
+                    <div class="shipping-title">Envío estándar</div>
+                    <div class="shipping-desc">Entrega en 3–5 días hábiles.</div>
+                </div>
+                <div class="shipping-price">$ {{ ENVIO_ESTANDAR }}</div>
+            </label>
+
+            <!-- ENVÍO RÁPIDO -->
+            <label class="shipping-card">
+                <input type="radio" name= "metodo_envio" value= "rapido" {% if envio.metodo == "rapido" %}checked{% endif
+                    %}>
+                <div class="shipping-icon">⚡</div>
+                <div class="shipping-text">
+                    <div class="shipping-title">Envío rápido</div>
+                    <div class="shipping-desc">Entrega en 24–48 horas.</div>
+                </div>
+                <div class="shipping-price">$ {{ ENVIO_RAPIDO }}</div>
+            </label>
+
+            <!-- ENVÍO GRATIS (DESACTIVADO) -->
+            <div class="shipping-card disabled">
+                <div class="shipping-icon">🎁</div>
+                <div class="shipping-text">
+                    <div class="shipping-title">Envío gratis</div>
+                    <div class="shipping-desc">
+                        Disponible para compras desde $ {{ ENVIO_GRATIS_MINIMO|floatformat:0 }}.
+                    </div>
+                </div>
+                <div class="shipping-price">$ 0</div>
+            </div>
+
+            {% endif %}
+        </div>
+
+        <div class="checkout-footer">
+            <a href="{% url 'checkout' %}" class="btn-ghost">Volver a contacto</a>
+            <button type="submit" class="btn-primary">Continuar ➜</button>
+        </div>
+
+    </form>
+</div>
+
+{% endblock %}

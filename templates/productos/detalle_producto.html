@@ -1,125 +1,84 @@
+{% extends "base.html" %}
 {% load static %}
 
-<!DOCTYPE html>
-<html lang="es">
+{% block extra_css %}
+<link rel="stylesheet" href="{% static 'productos/css/detalle_producto.css' %}">
+{% endblock %}
 
-<head>
-    <meta charset="UTF-8">
-    <title>{{ producto.nombre }} | Glowin</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
+{% block content %}
 
-    <style>
-        .tonos-container {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 12px;
-            margin-top: 8px;
-        }
+<div class="container product-page">
+    <div class="row">
 
-        .tono-item {
-            text-align: center;
-            cursor: pointer;
-        }
+        <!-- Imagen -->
+        <div class="col-md-5">
+            {% if producto.imagen %}
+            <img src="{{ producto.imagen.url }}" class="img-fluid rounded shadow">
+            {% else %}
+            <img src="{% static 'img/sin_imagen.png' %}" class="img-fluid rounded shadow">
+            {% endif %}
+        </div>
 
-        .tono-color {
-            width: 45px;
-            height: 45px;
-            border-radius: 10px;
-            border: 2px solid transparent;
-            margin-bottom: 4px;
-            transition: border 0.2s ease, transform 0.2s ease;
-        }
+        <!-- Información -->
+        <div class="col-md-7">
 
-        .tono-item input[type="radio"] {
-            display: none;
-        }
+            <form method="post" action="{% url 'agregar_al_carrito' producto.id %}">
+                {% csrf_token %}
 
-        .tono-item input[type="radio"]:checked+.tono-color {
-            border-color: #d63384;
-            transform: scale(1.05);
-        }
+                <h2 class="product-title">{{ producto.nombre }}</h2>
+                <h4 class="product-price">$ {{ producto.precio|floatformat:0 }}</h4>
+                <p><strong>Marca:</strong> {{ producto.marca }}</p>
+                <p class="product-description">{{ producto.descripcion }}</p>
 
-        .tono-nombre {
-            font-size: 12px;
-            color: #333;
-        }
-    </style>
-</head>
-
-
-<body class="bg-light">
-
-    <div class="container mt-5">
-        <div class="row">
-
-            <!-- Imagen -->
-            <div class="col-md-5">
-                {% if producto.imagen %}
-                <img src="{{ producto.imagen.url }}" class="img-fluid rounded shadow">
-                {% else %}
-                <img src="{% static 'img/sin_imagen.png' %}" class="img-fluid rounded shadow">
+                <!-- Tallas -->
+                {% if producto.tallas.count %}
+                <label class="fw-bold">Talla:</label>
+                <select class="form-control mb-2" name="talla">
+                    {% for t in producto.tallas.all %}
+                    <option>{{ t.nombre }}</option>
+                    {% endfor %}
+                </select>
                 {% endif %}
-            </div>
 
-            <!-- Información -->
-            <div class="col-md-7">
+                <!-- Colores -->
+                {% if producto.colores.count %}
+                <label class="fw-bold">Color:</label>
+                <select class="form-control mb-2" name="color">
+                    {% for c in producto.colores.all %}
+                    <option>{{ c.nombre }}</option>
+                    {% endfor %}
+                </select>
+                {% endif %}
 
-                <form method="post" action="{% url 'agregar_al_carrito' producto.id %}">
-                    {% csrf_token %}
+                <!-- Tonos -->
+                {% if producto.tonos.count %}
+                <label class="fw-bold mt-2">Tonos disponibles:</label>
 
-                    <h2>{{ producto.nombre }}</h2>
-                    <h4 class="text-danger">$ {{ producto.precio }}</h4>
-                    <p><strong>Marca:</strong> {{ producto.marca }}</p>
-                    <p>{{ producto.descripcion }}</p>
+                <div class="tonos-container">
+                    {% for tono in producto.tonos.all %}
+                    <label class="tono-item">
+                        <input type="radio" name="tono" value="{{ tono.id }}">
+                        <div class="tono-color" style="background-color: {{ tono.color }};"></div>
+                        <div class="tono-nombre">{{ tono.nombre }}</div>
+                    </label>
+                    {% endfor %}
+                </div>
+                {% endif %}
 
-                    <!-- Tallas -->
-                    {% if producto.tallas.count %}
-                    <label class="fw-bold">Talla:</label>
-                    <select class="form-control mb-2" name="talla">
-                        {% for t in producto.tallas.all %}
-                        <option>{{ t.nombre }}</option>
-                        {% endfor %}
-                    </select>
-                    {% endif %}
+                <!-- Cantidad -->
+                <label class="fw-bold mt-3">Cantidad:</label>
+                <input type="number" name="cantidad" value="1" min="1" class="form-control mb-3 qty-input">
 
-                    <!-- Colores -->
-                    {% if producto.colores.count %}
-                    <label class="fw-bold">Color:</label>
-                    <select class="form-control mb-2" name="color">
-                        {% for c in producto.colores.all %}
-                        <option>{{ c.nombre }}</option>
-                        {% endfor %}
-                    </select>
-                    {% endif %}
+                <!-- Botones -->
+                <button type="submit" class="btn btn-dark w-100">🛒 Añadir al carrito</button>
 
-                    <!-- TONOS -->
-                    {% if producto.tonos.count %}
-                    <label class="fw-bold mt-2">Tonos disponibles:</label>
-                    <div class="tonos-container">
-                        {% for tono in producto.tonos.all %}
-                        <label class="tono-item">
-                            <input type="radio" name="tono" value="{{ tono.id }}">
-                            <div class="tono-color" style="background-color: {{ tono.color }};"></div>
-                            <div class="tono-nombre">{{ tono.nombre }}</div>
-                        </label>
-                        {% endfor %}
-                    </div>
-                    {% endif %}
+                <a onclick="history.back()" class="btn btn-outline-dark w-100 back-btn">
+                    Volver
+                </a>
+            </form>
 
-                    <!-- Cantidad -->
-                    <label class="fw-bold mt-3">Cantidad:</label>
-                    <input type="number" name="cantidad" value="1" min="1" class="form-control mb-3"
-                        style="width:120px;">
-
-                    <!-- Botón -->
-                    <button type="submit" class="btn btn-dark w-100">🛒 Añadir al carrito</button>
-                    <a href="/productos/" class="btn btn-outline-dark w-100 mt-2">Volver</a>
-
-                </form>
-            </div>
         </div>
     </div>
+</div>
 
-</body>
-
-</html>
+{% endblock %}

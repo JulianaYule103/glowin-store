@@ -7,81 +7,12 @@
 <head>
     <meta charset="UTF-8">
     <title>Checkout - Glowin</title>
+
+    <!-- Bootstrap -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <style>
-        /* --------- BARRA DE PROGRESO SUPERIOR --------- */
-        .checkout-progress {
-            display: flex;
-            justify-content: center;
-            margin-bottom: 40px;
-        }
-
-        .progress-steps {
-            display: flex;
-            align-items: center;
-            gap: 20px;
-        }
-
-        .step-item {
-            text-align: center;
-            width: 90px;
-            font-size: 14px;
-        }
-
-        .circle {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            border: 2px solid #d63384;
-            background: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: auto;
-            font-weight: bold;
-            color: #d63384;
-            transition: 0.3s;
-        }
-
-        .step-item.active .circle {
-            background: #d63384;
-            color: white;
-            transform: scale(1.15);
-        }
-
-        .line {
-            flex-grow: 1;
-            height: 3px;
-            background: #f3c1d7;
-            border-radius: 2px;
-            transition: 0.3s;
-        }
-
-        .line.active {
-            background: #d63384;
-        }
-
-        /* --------- CAJAS Y FORMULARIO --------- */
-        .checkout-box {
-            background: white;
-            padding: 25px;
-            border-radius: 12px;
-            box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-        }
-
-        .order-summary {
-            background: #fff7fb;
-            padding: 20px;
-            border-radius: 12px;
-            border: 1px solid #f3d0de;
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
-
+    <!-- Estilos externos -->
+    <link rel="stylesheet" href="{% static 'checkout/css/checkout.css' %}">
 </head>
 
 <body class="bg-light">
@@ -90,11 +21,10 @@
 
         <h2 class="text-center mb-4" style="color:#d63384;">Finalizar compra</h2>
 
-        <!-- ============================ -->
-        <!--     BARRA DE PROGRESO        -->
-        <!-- ============================ -->
+        <!-- Barra de progreso -->
         <div class="checkout-progress">
             <div class="progress-steps">
+
                 <div class="step-item active" id="prog-1">
                     <div class="circle">1</div>
                     <span>Contacto</span>
@@ -113,28 +43,30 @@
                     <div class="circle">3</div>
                     <span>Resumen</span>
                 </div>
+
             </div>
         </div>
 
-        <!-- ============================ -->
-        <!--         FORMULARIO           -->
-        <!-- ============================ -->
         <form method="POST">
             {% csrf_token %}
 
-            <!-- === PASO 1 === -->
+            <!-- ========== PASO 1 ========== -->
             <div id="step1" class="checkout-box">
                 <h4>Información de contacto</h4>
 
-                <div class="mb-3">
-                    <label>Correo electrónico</label>
-                    <input type="email" name="email" class="form-control" value="{{ usuario.email }}" required>
-                </div>
+                <label>Nombre</label>
+                <input type="text" name="nombre" class="form-control" required>
 
-                <button type="button" class="btn btn-dark w-100" onclick="goToStep(2)">Continuar ➜</button>
+                <label>Apellido</label>
+                <input type="text" name="apellido" class="form-control" required>
+
+                <label>Correo electrónico</label>
+                <input type="email" name="email" class="form-control" required>
+
+                <button type="button" class="btn btn-dark w-100 mt-3" onclick="goToStep(2)">Continuar ➜</button>
             </div>
 
-            <!-- === PASO 2 === -->
+            <!-- ========== PASO 2 ========== -->
             <div id="step2" class="checkout-box hidden">
                 <h4>Dirección de envío</h4>
 
@@ -174,168 +106,27 @@
 
                 <h4 class="mt-4">Método de envío</h4>
 
-                <style>
-                    .envio-option {
-                        border: 2px solid #f3c1d7;
-                        padding: 15px;
-                        border-radius: 12px;
-                        cursor: pointer;
-                        transition: 0.2s;
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        margin-bottom: 12px;
-                        background: white;
-                    }
-
-                    .envio-option:hover {
-                        border-color: #d63384;
-                        background: #fff4fa;
-                    }
-
-                    .envio-option.selected {
-                        border-color: #d63384;
-                        background: #ffe6f2;
-                    }
-
-                    .envio-icon {
-                        font-size: 26px;
-                        margin-right: 12px;
-                    }
-
-                    .envio-info strong {
-                        font-size: 16px;
-                        color: #d63384;
-                    }
-
-                    .envio-radio {
-                        display: none;
-                    }
-                </style>
-
                 <div id="envioOpciones">
-
-                    <!-- ⭐ ENVÍO ESTÁNDAR -->
-                    <label class="envio-option" onclick="selectEnvio(this,'8000')">
-                        <div class="envio-info d-flex">
-                            <div class="envio-icon">🚚</div>
-                            <div>
-                                <strong>Envío estándar</strong> <br>
-                                <span class="text-muted">Entrega 3-5 días</span><br>
-                                <span class="text-dark"><strong>$8.000</strong></span>
-                            </div>
-                        </div>
-                        <input type="radio" class="envio-radio" name="metodo_envio" value="Estandar" required>
-                    </label>
-
-                    <!-- ⭐ ENVÍO RÁPIDO -->
-                    <label class="envio-option" onclick="selectEnvio(this,'12000')">
-                        <div class="envio-info d-flex">
-                            <div class="envio-icon">⚡</div>
-                            <div>
-                                <strong>Envío rápido</strong> <br>
-                                <span class="text-muted">Entrega 24-48 horas</span><br>
-                                <span class="text-dark"><strong>$12.000</strong></span>
-                            </div>
-                        </div>
-                        <input type="radio" class="envio-radio" name="metodo_envio" value="Rapido">
-                    </label>
-
-                    <!-- ⭐ ENVÍO GRATIS -->
-                    <label class="envio-option" onclick="selectEnvio(this,'0')">
-                        <div class="envio-info d-flex">
-                            <div class="envio-icon">🎁</div>
-                            <div>
-                                <strong>Envío gratis</strong> <br>
-                                <span class="text-muted">Pedidos mayores a $120.000</span><br>
-                                <span class="text-dark"><strong>$0</strong></span>
-                            </div>
-                        </div>
-                        <input type="radio" class="envio-radio" name="metodo_envio" value="Gratis">
-                    </label>
-
+                    <!-- Las 3 opciones → ahora usan CSS externo -->
+                    {% include 'includes/checkout_envios.html' %}
                 </div>
 
-                <!-- Campo oculto para enviar el costo del envío al backend -->
                 <input type="hidden" name="costo_envio" id="costoEnvio" value="0">
 
-                <script>
-                    function selectEnvio(label, costo) {
-                        // quitar seleccion anterior
-                        document.querySelectorAll('.envio-option').forEach(opt => opt.classList.remove('selected'));
-
-                        // seleccionar actual
-                        label.classList.add('selected');
-
-                        // marcar radio
-                        const radio = label.querySelector("input[type='radio']");
-                        radio.checked = true;
-
-                        // guardar costo del envío
-                        document.getElementById("costoEnvio").value = costo;
-                    }
-                </script>
-
-
-
-                <div class="d-flex justify-content-between">
+                <div class="d-flex justify-content-between mt-3">
                     <button type="button" class="btn btn-outline-dark" onclick="goToStep(1)">⬅ Volver</button>
                     <button type="button" class="btn btn-dark" onclick="goToStep(3)">Continuar ➜</button>
                 </div>
             </div>
 
-            <!-- === PASO 3 === -->
+            <!-- ========== PASO 3 ========== -->
             <div id="step3" class="checkout-box hidden">
-
-                <h4>Método de pago</h4>
-
-                <select name="metodo_pago" class="form-select mb-4" required>
-                    <option value="">Selecciona un método</option>
-                    <option value="Contra entrega">Pago contra entrega</option>
-                    <option value="Nequi / Daviplata">Nequi / Daviplata</option>
-                    <option value="Transferencia Bancaria">Transferencia Bancaria</option>
-                    <option value="Tarjeta de crédito">Tarjeta de crédito</option>
-                </select>
 
                 <h4>Resumen del pedido</h4>
 
                 <div class="order-summary mb-3">
                     {% for item in items %}
-                    <div class="d-flex align-items-center mb-3"
-                        style="border-bottom:1px solid #eee; padding-bottom:10px;">
-
-                        <img src="{{ item.producto.imagen.url }}" class="rounded"
-                            style="width:70px; height:70px; object-fit:cover; margin-right:12px;">
-
-                        <div style="flex:1;">
-                            <strong>{{ item.producto.nombre }}</strong> <br>
-
-                            {% if item.tono %}
-                            <span class="text-muted" style="font-size:14px;">
-                                🎨 <strong>{{ item.tono.nombre }}</strong>
-                                <span style="
-                                    display:inline-block;
-                                    width:14px;
-                                    height:14px;
-                                    border-radius:4px;
-                                    border:1px solid #ccc;
-                                    background-color: {{ item.tono.color }};
-                                    margin-left:5px;">
-                                </span>
-                            </span>
-                            <br>
-                            {% endif %}
-
-                            <span style="font-size:14px;" class="text-muted">
-                                Cantidad: {{ item.cantidad }}
-                            </span>
-                        </div>
-
-                        <div class="text-end" style="min-width:90px;">
-                            <strong>$ {{ item.subtotal|floatformat:0|intcomma }}</strong>
-                        </div>
-
-                    </div>
+                    {% include 'includes/checkout_item.html' %}
                     {% endfor %}
 
                     <div class="text-end mt-3">
@@ -343,62 +134,38 @@
                     </div>
                 </div>
 
-                <div class="text-end mt-2">
+                <div class="text-end">
                     <span class="text-muted">Envío:</span>
                     <strong id="envioResumen">$0</strong>
                 </div>
 
+                <button type="button" class="btn btn-outline-dark mt-3" onclick="goToStep(2)">⬅ Volver</button>
 
-                <div class="d-flex justify-content-between">
-                    <button type="button" class="btn btn-outline-dark" onclick="goToStep(2)">⬅ Volver</button>
-                    <button type="submit" class="btn btn-success">Confirmar pedido</button>
-                </div>
+                <!-- Mercado Pago -->
+                <div id="wallet_container" class="mt-4"></div>
+
+                <script src="https://sdk.mercadopago.com/js/v2"></script>
+                <script>
+                    const mp = new MercadoPago("{{ MP_PUBLIC_KEY }}", { locale: "es-CO" });
+
+                    fetch("/productos/crear-preferencia/")
+                        .then(res => res.json())
+                        .then(data => {
+                            if (data.preference_id)
+                                mp.bricks().create("wallet", "wallet_container", {
+                                    initialization: { preferenceId: data.preference_id }
+                                });
+                        });
+                </script>
 
             </div>
+
         </form>
+
     </div>
 
-
-    <!-- ============================ -->
-    <!--   CONTROLADOR DE LOS PASOS  -->
-    <!-- ============================ -->
-    <script>
-        function updateProgress(step) {
-            const steps = [1, 2, 3];
-
-            steps.forEach(num => {
-                document.getElementById(`prog-${num}`).classList.remove("active");
-            });
-
-            steps.slice(0, step).forEach(num => {
-                document.getElementById(`prog-${num}`).classList.add("active");
-            });
-
-            // Líneas activas
-            document.getElementById("line-1").classList.toggle("active", step >= 2);
-            document.getElementById("line-2").classList.toggle("active", step === 3);
-        }
-
-        function goToStep(step) {
-
-            document.getElementById("step1").classList.add("hidden");
-            document.getElementById("step2").classList.add("hidden");
-            document.getElementById("step3").classList.add("hidden");
-
-            document.getElementById(`step${step}`).classList.remove("hidden");
-
-            updateProgress(step);
-        }
-    </script>
-    <script>
-        // Actualizar el costo de envío en el resumen
-        document.getElementById("envioOpciones").addEventListener("click", function () {
-            const costo = document.getElementById("costoEnvio").value;
-            document.getElementById("envioResumen").textContent =
-                "$ " + Number(costo).toLocaleString("es-CO");
-        });
-    </script>
-
+    <!-- JS EXTERNO -->
+    <script src="{% static 'checkout/js/checkout.js' %}"></script>
 
 </body>
 

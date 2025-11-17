@@ -1,0 +1,31 @@
+{% load static %}
+<header id="navbarGlowin" class="glowin-navbar">
+
+    <a href="{% url 'home' %}" class="glowin-logo">Glowin</a>
+
+    <nav class="glowin-menu">
+        {% if categorias %}
+        {% for cat in categorias %}
+        <a href="{% url 'productos_por_categoria' cat.id %}">{{ cat.nombre }}</a>
+        {% endfor %}
+        {% endif %}
+    </nav>
+
+    <div class="glowin-icons">
+
+        <!-- Buscar -->
+        <i class="bi bi-search" id="openSearch" style="cursor:pointer;"></i>
+
+        {% if user.is_authenticated %}
+        <a href="/accounts/logout/"><i class="bi bi-person"></i></a>
+        {% else %}
+        <a href="/accounts/login/"><i class="bi bi-person"></i></a>
+        {% endif %}
+
+        <a href="{% url 'ver_carrito' %}">
+            <i class="bi bi-bag"></i>
+        </a>
+
+    </div>
+
+</header>

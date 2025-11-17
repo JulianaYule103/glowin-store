@@ -1,0 +1,56 @@
+/* LOGOUT GLOWIN — ESTILO MODERNO */
+
+.logout-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 80px 20px;
+}
+
+.logout-card {
+    width: 340px;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.08);
+    border: 1px solid #f3d0de;
+}
+
+.logout-title {
+    font-size: 24px;
+    font-weight: bold;
+    color: #d63384;
+    margin-bottom: 20px;
+}
+
+.btn-logout {
+    width: 100%;
+    padding: 12px;
+    background: #d63384;
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 15px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: .25s;
+}
+
+.btn-logout:hover {
+    background: #b1296f;
+}
+
+.cancel-text {
+    margin-top: 15px;
+}
+
+.cancel-link {
+    color: #d63384;
+    font-weight: 600;
+    text-decoration: none;
+}
+
+.cancel-link:hover {
+    text-decoration: underline;
+}
