@@ -29,9 +29,10 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 SECRET_KEY = 'django-insecure-=qjvdoy^1a0m0*ml&t+qvg0#wlsmal5en+!ke349+kbdk$ebd6'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = False
+DEBUG = True
 
-ALLOWED_HOSTS = ['*']
+ALLOWED_HOSTS = ['*', 'glowin-store.onrender.com']
+
 
 
 # Application definition
